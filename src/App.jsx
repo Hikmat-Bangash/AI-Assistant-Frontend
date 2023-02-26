@@ -28,6 +28,7 @@ function App() {
       },
     ];
     setMessages(tempMessages);
+    
     setMessageText("");
 
     setTimeout(() =>
