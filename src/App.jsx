@@ -28,7 +28,7 @@ function App() {
       },
     ];
     setMessages(tempMessages);
-    
+
     setMessageText("");
 
     setTimeout(() =>
@@ -60,7 +60,7 @@ function App() {
         },
       ]);
     } catch (err) {
-      const error = "Error processing this message, please try in sometime.";
+      const error = "Something went wrong, please try again.";
       setMessages((prev) => [
         ...prev,
         {
