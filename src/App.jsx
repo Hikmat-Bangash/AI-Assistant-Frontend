@@ -12,7 +12,7 @@ function App() {
   const [messages, setMessages] = useState([
     {
       from: "ai",
-      text: "Hi there! I'm you AI assistant, I'm here to help you out with your questions. Ask me anything you want.",
+      text: "Hi there! I'm your AI assistant, I'm here to help you out with your questions. Ask me anything you want.",
     },
   ]);
   const [processing, setProcessing] = useState(false);
