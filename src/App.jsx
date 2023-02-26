@@ -6,17 +6,22 @@ import robotIcon from "./robot.png";
 import styles from "./App.module.css";
 
 function App() {
+  
   const lastMsg = useRef();
+// when the very first time someone visit to our site, there must be a message to show. So the below logic has built for this purpose.
+  if (!JSON.parse(localStorage.getItem('messages'))) {
+    const defaultMsg = [{
+      from: "ai",
+      text: "Hi there! I'm your AI Assistant, I'm here to help you out with your questions. Ask me anything you want",
+    }]
+    localStorage.setItem("messages", JSON.stringify(defaultMsg));
+  }
 
   const [messageText, setMessageText] = useState("");
-  const [messages, setMessages] = useState([
-    {
-      from: "ai",
-      text: "Hi there! I'm your AI assistant, I'm here to help you out with your questions. Ask me anything you want.",
-    },
-  ]);
+  const [messages, setMessages] = useState( JSON.parse(localStorage.getItem('messages')) );
   const [processing, setProcessing] = useState(false);
-
+  
+  // handleSubmission method definition when user submit their query
   const handleSubmission = async () => {
     if (!messageText.trim() || processing) return;
 
@@ -26,8 +31,11 @@ function App() {
         from: "human",
         text: messageText,
       },
+      
     ];
-    setMessages(tempMessages);
+
+    localStorage.setItem("messages", JSON.stringify(tempMessages));
+    setMessages(tempMessages)
 
     setMessageText("");
 
@@ -52,13 +60,15 @@ function App() {
       const data = await res.json();
       const ans = data.data;
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          from: "ai",
-          text: ans,
-        },
-      ]);
+      const response = {
+        from: "ai",
+        text: ans,
+      }
+      const allMessages = JSON.parse(localStorage.getItem('messages'));
+      allMessages.push(response)
+      setMessages(allMessages)
+      localStorage.setItem("messages", JSON.stringify(allMessages));
+
     } catch (err) {
       const error = "Something went wrong, please try again.";
       setMessages((prev) => [
