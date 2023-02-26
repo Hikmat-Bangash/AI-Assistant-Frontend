@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Send } from "react-feather";
 
 import robotIcon from "./robot.png";
@@ -78,14 +78,16 @@ function App() {
           text: error,
         },
       ]);
-    }
+    }    
+  };
 
+  useEffect(() => {
     setTimeout(() =>
       lastMsg.current.scrollIntoView({
         behavior: "smooth",
       })
     );
-  };
+  }, [])
 
   return (
     <div className={styles.app}>
