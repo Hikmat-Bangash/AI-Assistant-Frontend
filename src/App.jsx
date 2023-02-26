@@ -87,7 +87,7 @@ function App() {
         behavior: "smooth",
       })
     );
-  }, [])
+  }, [messages])
 
   return (
     <div className={styles.app}>
