@@ -37,7 +37,7 @@ function App() {
     );
     try {
       setProcessing(true);
-      const res = await fetch(`http://localhost:5000/chat`, {
+      const res = await fetch(`https://ai-assistant-server.vercel.app/chat`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
