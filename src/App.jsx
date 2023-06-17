@@ -5,13 +5,13 @@ import robotIcon from "./robot.png";
 import styles from "./App.module.css";
 
 function App() {
-
+  const defaultMsg = [{
+    from: "ai",
+    text: "Hi there! I'm your AI Assistant, I'm here to help you out with your questions. Ask me anything you want",
+  }]
 // when the very first time someone visit to our site, there must be a message to show. So the below logic has built for this purpose.
   if (!JSON.parse(localStorage.getItem('messages'))) {
-    const defaultMsg = [{
-      from: "ai",
-      text: "Hi there! I'm your AI Assistant, I'm here to help you out with your questions. Ask me anything you want",
-    }]
+  
     localStorage.setItem("messages", JSON.stringify(defaultMsg));
   }
 
@@ -83,7 +83,7 @@ function App() {
   // clear chat 
   const ClearChat = () => {
     // remove all history from localstorage
-    localStorage.setItem("messages", JSON.stringify([]));
+    localStorage.setItem("messages", JSON.stringify(defaultMsg));
     setMessages([{
       from: "ai",
       text: "Hi there! I'm your AI Assistant, I'm here to help you out with your questions. Ask me anything you want",

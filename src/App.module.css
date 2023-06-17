@@ -69,6 +69,7 @@ background: rgb(5, 3, 24);
   font-weight: 400;
   letter-spacing: 1px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
 
 }
 .clearhistory{
