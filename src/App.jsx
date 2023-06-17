@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Send } from "react-feather";
-
 import robotIcon from "./robot.png";
 
 import styles from "./App.module.css";
 
 function App() {
-  
-  const lastMsg = useRef();
+
 // when the very first time someone visit to our site, there must be a message to show. So the below logic has built for this purpose.
   if (!JSON.parse(localStorage.getItem('messages'))) {
     const defaultMsg = [{
@@ -17,6 +15,7 @@ function App() {
     localStorage.setItem("messages", JSON.stringify(defaultMsg));
   }
 
+  const lastMsg = useRef();
   const [messageText, setMessageText] = useState("");
   const [messages, setMessages] = useState( JSON.parse(localStorage.getItem('messages')) );
   const [processing, setProcessing] = useState(false);
@@ -44,6 +43,7 @@ function App() {
         behavior: "smooth",
       })
     );
+   
     try {
       setProcessing(true);
       const res = await fetch(`https://ai-assistant-server.vercel.app/chat`, {
@@ -80,8 +80,18 @@ function App() {
       ]);
     }    
   };
+  // clear chat 
+  const ClearChat = () => {
+    // remove all history from localstorage
+    localStorage.setItem("messages", JSON.stringify([]));
+    setMessages([{
+      from: "ai",
+      text: "Hi there! I'm your AI Assistant, I'm here to help you out with your questions. Ask me anything you want",
+    }]);
+  }
 
   useEffect(() => {
+
     setTimeout(() =>
       lastMsg.current.scrollIntoView({
         behavior: "smooth",
@@ -100,7 +110,7 @@ function App() {
         </div>
         {/* header right side */}
         <div className={styles.right}>
-              <p>HB</p>
+              <p onClick={ClearChat}>Clear</p>
         </div>
         
       </div>
@@ -136,8 +146,7 @@ function App() {
           ""
         )}
 
-        <div ref={lastMsg} />
-      </div>
+        <div ref={lastMsg} />  </div>
 
       <div className={styles.footer}>
         <input
@@ -159,6 +168,7 @@ function App() {
           Hikmat Bangash
         </span></p>
       </div>
+      
     </div>
   );
 }

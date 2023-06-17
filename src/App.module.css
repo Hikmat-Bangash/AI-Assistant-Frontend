@@ -65,11 +65,15 @@ background: rgb(5, 3, 24);
 }
 .header .right {
   color: white;
-  font-size: larger;
-  font-weight: 500;
+  font-size: large;
+  font-weight: 400;
   letter-spacing: 1px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
+}
+.clearhistory{
+  color: white;
+  font-weight: 400;
 }
 .body {
   flex: 1;
